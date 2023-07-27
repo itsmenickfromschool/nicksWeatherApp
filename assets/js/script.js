@@ -55,10 +55,19 @@ searchButton.addEventListener('click', function(event){
             console.log(data)
             for (let index = 7; index < 46; index += 8) {
                 var indexString = index.toString()
-                console.log(indexString)
+                console.log("type:" + typeof indexString + " indexString:" + indexString)
                 // var targetCard = document.querySelector(`#${indexString}`)
                 // console.log("Target card:"+ targetCard)
-                console.log(data.list[index].dt_txt) 
+                var date = data.list[index].dt_txt;
+                console.log(date);
+                var conditions = data.list[index].weather[0].main;
+                console.log(conditions);
+                var temp = data.list[index].main.temp;
+                console.log(`${temp}\xB0 F`);
+                var wind = data.list[index].wind.speed;
+                console.log(`wind: ${wind}mph`);
+                var humidity = data.list[index].main.humidity;
+                console.log(`${humidity}% rh`);
             }
             
         })
