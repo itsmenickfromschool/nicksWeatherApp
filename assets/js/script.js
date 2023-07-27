@@ -53,9 +53,13 @@ searchButton.addEventListener('click', function(event){
         })
         .then(function(data){
             console.log(data)
-            // for (let index = 0; index < 39; index + 8) {
-            //     console.log(data.list[index].dt_text) 
-            // }
+            for (let index = 7; index < 46; index += 8) {
+                var indexString = index.toString()
+                console.log(indexString)
+                // var targetCard = document.querySelector(`#${indexString}`)
+                // console.log("Target card:"+ targetCard)
+                console.log(data.list[index].dt_txt) 
+            }
             
         })
     
