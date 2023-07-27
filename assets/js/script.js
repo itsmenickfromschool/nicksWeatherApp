@@ -24,8 +24,6 @@ searchButton.addEventListener('click', function(event){
         })
         .then(function (data) {
             console.log(data);
-            // var icon = data.weather[0].icon
-            // todaysConditions.content = '\'+`${icon}`
             todaysConditions.textContent = `${data.weather[0].main}`
             todaysTemp.textContent = `${data.main.temp}\xB0 F`
             todaysWind.textContent = `windspeed: ${data.wind.speed}mph`
@@ -49,16 +47,21 @@ searchButton.addEventListener('click', function(event){
         
 
 
-    // fetch(fiveDayURL)
-    //     .then(function (response){
-    //         return response.json();
-    //     })
-    //     .then(function(promise){
-    //         console.log(promise)
-    //     })
+    fetch(fiveDayURL)
+        .then(function (response){
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data)
+            // for (let index = 0; index < 39; index + 8) {
+            //     console.log(data.list[index].dt_text) 
+            // }
+            
+        })
+    
 
-    })
 
+})
 
 
 
