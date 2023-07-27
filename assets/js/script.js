@@ -11,8 +11,6 @@ searchButton.addEventListener('click', function(event){
     console.log(city.value)
     
     console.log(currentWeatherURL);
-    
-    function search(){
         fetch(currentWeatherURL)
         .then(function (response) {
             return response.json();
@@ -28,9 +26,10 @@ searchButton.addEventListener('click', function(event){
         .then(function(promise){
             console.log(promise)
         })
-    
-    }})
-    
+
+    }
+
+
 
 
 
