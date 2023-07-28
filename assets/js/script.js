@@ -11,11 +11,12 @@ var cardContainer = document.getElementById("forecast")
 // window.addEventListener('load', function(){
 //     this.localStorage.getItem('')
 // })
-
+var cityArray = []
 searchButton.addEventListener('click', function(event){
     event.preventDefault()
     var citySearch = city.value
-    // localStorage.setItem(key, value)
+    cityArray.unshift(citySearch)
+    localStorage.setItem("search", cityArray)
     insertCity.textContent = `Today's weather in ${citySearch}`
     var currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}&units=imperial`
     
@@ -24,6 +25,7 @@ searchButton.addEventListener('click', function(event){
     fetch(currentWeatherURL)
     .then(function (response) {
         return response.json();
+        
     })
     .then(function (data) {
         console.log(data);
@@ -70,7 +72,7 @@ searchButton.addEventListener('click', function(event){
             var humidity = data.list[index].main.humidity;
             console.log(`${humidity}% rh`);
             var card = document.createElement('div')
-            card.classList.add('card','col-6','col-md-2')
+            card.classList.add('card','col-6','col-md-2','bg-dark', 'text-light')
             cardContainer.append(card)
             var cardBody = document.createElement('div')
             cardBody.classList.add('card-body')
@@ -93,11 +95,11 @@ searchButton.addEventListener('click', function(event){
 
 })
 /* TODO *******************
--add icons in cards for 5 day
+-add icons in cards for 5 day DONE
 -add search to local storage
 -create buttons for history
 -get localstorage on the page load and also on the click event
--remove cards when new search happens. 
+-remove cards when new search happens. DONE
 
 
 
