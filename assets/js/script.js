@@ -59,6 +59,7 @@ searchButton.addEventListener('click', function(event){
         for (let index = 7; index < 46; index += 8) {
             var date = data.list[index].dt_txt;
             console.log(date);
+            var icon = `http://openweathermap.org/img/w/${data.list[index].weather[0].icon}.png`
             var conditions = data.list[index].weather[0].main;
             console.log(conditions);
             var temp = data.list[index].main.temp;
@@ -78,6 +79,9 @@ searchButton.addEventListener('click', function(event){
             cardTitle.classList.add('card-title')
             cardTitle.textContent = dayjs(date).format('ddd MMMM D');
             cardBody.append(cardTitle)
+            var cardIcon = document.createElement('img')
+            cardIcon.src = icon;
+            cardBody.append(cardIcon)
             var cardText = document.createElement('p')
             cardText.classList.add('card-text')
             cardText.textContent = `${conditions}\n${temp}\xB0 F\nwind: ${wind}mph\n${humidity}% rh`
