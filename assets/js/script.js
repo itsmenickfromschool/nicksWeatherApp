@@ -18,88 +18,84 @@ searchButton.addEventListener('click', function(event){
     // localStorage.setItem(key, value)
     insertCity.textContent = `Today's weather in ${citySearch}`
     var currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}&units=imperial`
-
+    
     var fiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearch}&appid=${apiKey}&units=imperial`
-
+    
     fetch(currentWeatherURL)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-            icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
-            todaysConditions.textContent = `${data.weather[0].main}`
-            todaysTemp.textContent = `${data.main.temp}\xB0 F`
-            todaysWind.textContent = `windspeed: ${data.wind.speed}mph`
-            todaysHumidity.textContent = `${data.main.humidity}% relative humidity`
-            
-        })
-        .catch(function(error){ 
-            alert("City not found!")
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        console.log(data);
+        icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
+        todaysConditions.textContent = `${data.weather[0].main}`
+        todaysTemp.textContent = `${data.main.temp}\xB0 F`
+        todaysWind.textContent = `windspeed: ${data.wind.speed}mph`
+        todaysHumidity.textContent = `${data.main.humidity}% relative humidity`
+        
+    })
+    .catch(function(error){ 
+        alert("City not found!")
     });
-           
+         
     
     
-   
     
     
-        
-
-
-        
-        
-
-
+    
+    
+    
+    
+    
+    
+    
+    
     fetch(fiveDayURL)
-        .then(function (response){
-            return response.json();
-        })
-        .then(function(data){
-            console.log(data)
-            for (let index = 7; index < 46; index += 8) {
-                var date = data.list[index].dt_txt;
-                console.log(date);
-                var conditions = data.list[index].weather[0].main;
-                console.log(conditions);
-                var temp = data.list[index].main.temp;
-                console.log(`${temp}\xB0 F`);
-                var wind = data.list[index].wind.speed;
-                console.log(`wind: ${wind}mph`);
-                var humidity = data.list[index].main.humidity;
-                console.log(`${humidity}% rh`);
-                var cardContainer = document.getElementById("forecast")
-                var card = document.createElement('div')
-                card.classList.add('card','col-6','col-md-2')
-                cardContainer.append(card)
-                var cardBody = document.createElement('div')
-                cardBody.classList.add('card-body')
-                card.append(cardBody)
-                var cardTitle = document.createElement('h5')
-                cardTitle.classList.add('card-title')
-                cardTitle.textContent = date
-                cardBody.append(cardTitle)
-                var cardText = document.createElement('p')
-                cardText.classList.add('card-text')
-                cardText.textContent = `${conditions}\n${temp}\xB0 F\nwind: ${wind}mph\n${humidity}% rh`
-                cardBody.append(cardText)
-
-
-           
-
-
-
-
-
-
-
-           
-            }
-            
-        })
-    
+    .then(function (response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data)
+        for (let index = 7; index < 46; index += 8) {
+            var date = data.list[index].dt_txt;
+            console.log(date);
+            var conditions = data.list[index].weather[0].main;
+            console.log(conditions);
+            var temp = data.list[index].main.temp;
+            console.log(`${temp}\xB0 F`);
+            var wind = data.list[index].wind.speed;
+            console.log(`wind: ${wind}mph`);
+            var humidity = data.list[index].main.humidity;
+            console.log(`${humidity}% rh`);
+            var cardContainer = document.getElementById("forecast")
+            var card = document.createElement('div')
+            card.classList.add('card','col-6','col-md-2','removeTarget')
+            cardContainer.append(card)
+            var cardBody = document.createElement('div')
+            cardBody.classList.add('card-body')
+            card.append(cardBody)
+            var cardTitle = document.createElement('h5')
+            cardTitle.classList.add('card-title')
+            cardTitle.textContent = dayjs(date).format('ddd MMMM D');
+            cardBody.append(cardTitle)
+            var cardText = document.createElement('p')
+            cardText.classList.add('card-text')
+            cardText.textContent = `${conditions}\n${temp}\xB0 F\nwind: ${wind}mph\n${humidity}% rh`
+            cardBody.append(cardText)
+        }
+//         var deleteCards = document.querySelectorAll('.removeTarget');
+// deleteCards.remove(); 
+        
+    })
 
 
 })
+/* TODO *******************
+-add icons in cards for 5 day
+-add search to local storage
+-create buttons for history
+-get localstorage on the page load and also on the click event
+-remove cards when new search happens. 
 
 
 
