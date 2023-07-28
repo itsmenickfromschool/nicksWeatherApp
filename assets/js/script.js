@@ -7,7 +7,7 @@ var todaysTemp = document.querySelector('#todaysTemp')
 var todaysWind = document.querySelector('#todaysWind')
 var todaysHumidity = document.querySelector('#todaysHumidity')
 var icon = document.getElementById('icon')
-
+var cardContainer = document.getElementById("forecast")
 // window.addEventListener('load', function(){
 //     this.localStorage.getItem('')
 // })
@@ -56,6 +56,7 @@ searchButton.addEventListener('click', function(event){
     })
     .then(function(data){
         console.log(data)
+        cardContainer.innerHTML = ''
         for (let index = 7; index < 46; index += 8) {
             var date = data.list[index].dt_txt;
             console.log(date);
@@ -68,9 +69,8 @@ searchButton.addEventListener('click', function(event){
             console.log(`wind: ${wind}mph`);
             var humidity = data.list[index].main.humidity;
             console.log(`${humidity}% rh`);
-            var cardContainer = document.getElementById("forecast")
             var card = document.createElement('div')
-            card.classList.add('card','col-6','col-md-2','removeTarget')
+            card.classList.add('card','col-6','col-md-2')
             cardContainer.append(card)
             var cardBody = document.createElement('div')
             cardBody.classList.add('card-body')
@@ -87,8 +87,6 @@ searchButton.addEventListener('click', function(event){
             cardText.textContent = `${conditions}\n${temp}\xB0 F\nwind: ${wind}mph\n${humidity}% rh`
             cardBody.append(cardText)
         }
-//         var deleteCards = document.querySelectorAll('.removeTarget');
-// deleteCards.remove(); 
         
     })
 
