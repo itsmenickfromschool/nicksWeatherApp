@@ -1,95 +1,55 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Weather</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  </head>
-  <body>
-    <nav class="navbar bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand">Weather</a>
-        <form class="d-flex" role="search">
-          <input id="cityInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button id='search' class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
-    <div class="row">
 
-      <div class="btn-group-vertical col-12 col-md-3 " role="group" aria-label="Vertical button group">
-        <button type="button" class="btn btn-primary">Button</button>
-        <button type="button" class="btn btn-primary">Button</button>
-        <button type="button" class="btn btn-primary">Button</button>
-        <button type="button" class="btn btn-primary">Button</button>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">Weather</a>
+      <form class="d-flex" role="search">
+        <input id="cityInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button id='search' class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="row">
+
+    <div class="btn-group-vertical col-12 col-md-3 " role="group" aria-label="Vertical button group">
+     <!-- <button type="button" class="btn btn-primary">Button</button> -->
+    
+    </div>
+    <div id='currentWeather' class="card col-12 col-md-9">
+      <div class="card-header">
+        <h3 id="insertCity">Today's Weather</h3>
       </div>
-      <div id='currentWeather' class="card col-12 col-md-9">
-        <div class="card-header">
-          <h3 id="insertCity">Today's Weather</h3>
-        </div>
-        <div class="card-body">
-          <h5 id="conditions" class="card-title">sample text</h5>
-         <p id = 'todaysTemp' class='card-subtitle'>sample text</p>
-         <p id="todaysWind" class="card-subtitle">sample text</p>
-         <p id="todaysHumidity" class="card-subtitle">sample text</p>
-        </div>
+      <div class="card-body">
+        <img id='icon' src="" alt="">
+        <h5 id="conditions" class="card-title">sample text</h5>
+        <p id='todaysTemp' class='card-subtitle'>sample text</p>
+        <p id="todaysWind" class="card-subtitle">sample text</p>
+        <p id="todaysHumidity" class="card-subtitle">sample text</p>
       </div>
     </div>
-    <div class="row">
+  </div>
+  <div class="header col-12 mt-5 d-flex justify-content-center"><h3>5 day Forecast</h3></div>
+  <div id="forecast" class="row mt-2 d-flex justify-content-around">
 
-      <div id='7'class="card col-6 col-med-2" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
+    
 
-      <div id='15' class="card col-6 col-med-2" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
+  </div>
 
-      <div id='23'class="card col-6 col-med-2" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <script src="./assets/js/script.js"></script>
+</body>
 
-      <div id='31' class="card col-6 col-med-2 " style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-
-      <div id='39'class="card col-6 col-med-2" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="./assets/js/script.js"></script>
-  </body>
 </html>
