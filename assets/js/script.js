@@ -1,5 +1,5 @@
 const apiKey = `40c5846d93a5d9298ee752b2e4b83b4f`;
-var city = document.querySelector('#cityInput') // need a value?
+var city = document.querySelector('#cityInput') 
 var searchButton = document.querySelector('#search')
 var insertCity = document.querySelector('#insertCity')
 var todaysConditions = document.querySelector('#conditions')
@@ -13,6 +13,11 @@ var buttonDiv = document.getElementById('buttonDiv')
 
 searchButton.addEventListener('click', function(event){
     event.preventDefault()
+    letsPlayFetch();
+    
+})
+
+function letsPlayFetch (){
     var citySearch = city.value
     
     insertCity.textContent = `Today's weather in ${citySearch}`;
@@ -29,7 +34,6 @@ searchButton.addEventListener('click', function(event){
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
             icon.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
             todaysConditions.textContent = `${data.weather[0].main}`;
             todaysTemp.textContent = `${data.main.temp}\xB0 F`;
@@ -83,27 +87,30 @@ searchButton.addEventListener('click', function(event){
                 humid.textContent = `${humidity}% rh`;
                 cardBody.append(humid);
             }
+            searchHistory();
     })
+    
+};
 
+function searchHistory(){
+    var buttonArray = localStorage.getItem("search")
+    if (buttonArray !== []){
+        console.log(buttonArray)
+        for (var i = 0; i < buttonArray.length; i++){
+            var newButton = document.createElement('button');
+            newButton.classList.add('btn', 'btn-secondary');
+            newButton.textContent = buttonArray[i];
+            buttonDiv.append(newButton);
 
-})
+    }
+    }
+
+}
+
 /* TODO *******************
 -add icons in cards for 5 day DONE
 -add search to local storage DONE
 -create buttons for history
--get localstorage on the page load and also on the click event
+-get localstorage on the page load and also on the click event, maybe have a standard city? 
 -remove cards when new search happens. DONE
-
-
-
-
-/* Tutoring session
-
-***************************
-TODO
-Figure out why/ how the city input  value isn't working, think I need an event listener? 
--how to get the data from the api that I need to do the search in one go
-- assign each piece to a variable
-- 
-
 */
