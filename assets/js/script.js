@@ -8,7 +8,7 @@ var todaysWind = document.querySelector('#todaysWind')
 var todaysHumidity = document.querySelector('#todaysHumidity')
 var icon = document.getElementById('icon')
 var cardContainer = document.getElementById("forecast")
-var cityArray = [] 
+var cityArray = JSON.parse(localStorage.getItem("search")) || []  
 var buttonDiv = document.getElementById('buttonDiv')
 
 console.log(typeof cityArray)
@@ -29,6 +29,7 @@ searchButton.addEventListener('click', function(event){
 function letsPlayFetch (citySearch){
     
     insertCity.textContent = `Today's weather in ${citySearch}`;
+    citySearch = citySearch.toLowerCase();
     var currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}&units=imperial`;
     
     var fiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${citySearch}&appid=${apiKey}&units=imperial`;
@@ -36,9 +37,11 @@ function letsPlayFetch (citySearch){
     fetch(currentWeatherURL)
         .then(function (response) {
             if (response.status === 200) {
-                cityArray.unshift(citySearch);
-                var stringy = JSON.stringify(cityArray)
-                localStorage.setItem("search", stringy);
+                if (cityArray.includes(citySearch) === false){
+                    cityArray.unshift(citySearch);
+                    var stringy = JSON.stringify(cityArray)
+                    localStorage.setItem("search", stringy);
+                }
             }
             return response.json();
         })
