@@ -8,17 +8,25 @@ var todaysWind = document.querySelector('#todaysWind')
 var todaysHumidity = document.querySelector('#todaysHumidity')
 var icon = document.getElementById('icon')
 var cardContainer = document.getElementById("forecast")
-var cityArray = []
+var cityArray = [] 
 var buttonDiv = document.getElementById('buttonDiv')
+
+console.log(typeof cityArray)
+
+window.addEventListener('load', function(event){
+    event.preventDefault();
+    letsPlayFetch('Zigzag')
+    searchHistory();
+})
 
 searchButton.addEventListener('click', function(event){
     event.preventDefault()
-    letsPlayFetch();
+    letsPlayFetch(city.value);
+    searchHistory();
     
 })
 
-function letsPlayFetch (){
-    var citySearch = city.value
+function letsPlayFetch (citySearch){
     
     insertCity.textContent = `Today's weather in ${citySearch}`;
     var currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch}&appid=${apiKey}&units=imperial`;
@@ -29,7 +37,8 @@ function letsPlayFetch (){
         .then(function (response) {
             if (response.status === 200) {
                 cityArray.unshift(citySearch);
-                localStorage.setItem("search", cityArray);
+                var stringy = JSON.stringify(cityArray)
+                localStorage.setItem("search", stringy);
             }
             return response.json();
         })
@@ -40,7 +49,7 @@ function letsPlayFetch (){
             todaysWind.textContent = `windspeed: ${data.wind.speed}mph`;
             todaysHumidity.textContent = `${data.main.humidity}% relative humidity`; 
         })
-        .catch(function(error){ 
+        .catch(function(){ 
             alert("City not found!");
     });  
     fetch(fiveDayURL)
@@ -93,9 +102,10 @@ function letsPlayFetch (){
 };
 
 function searchHistory(){
-    var buttonArray = localStorage.getItem("search")
-    if (buttonArray !== []){
-        console.log(buttonArray)
+    var retriever = localStorage.getItem("search")
+    var buttonArray = JSON.parse(retriever)
+    buttonDiv.innerHTML = ''
+    if (buttonArray.length !== 0){
         for (var i = 0; i < buttonArray.length; i++){
             var newButton = document.createElement('button');
             newButton.classList.add('btn', 'btn-secondary');
@@ -106,6 +116,15 @@ function searchHistory(){
     }
 
 }
+
+buttonDiv.addEventListener("click", function(event){
+    event.preventDefault();
+    letsPlayFetch(event.target.textContent)
+
+    // letsPlayFetch(EventTarget);
+})
+    
+
 
 /* TODO *******************
 -add icons in cards for 5 day DONE
